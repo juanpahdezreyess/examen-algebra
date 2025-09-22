@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Planificación de Producción — Toyota | Método de Sustitución</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#06b6d4;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; margin:0; background:linear-gradient(180deg,#071029 0%, #071833 60%); color:#e6eef6; -webkit-font-smoothing:antialiased}
+    .container{max-width:980px;margin:40px auto;padding:24px}
+    header{display:flex;gap:20px;align-items:center}
+    .logo{width:68px;height:68px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(4,8,15,0.6)}
+    .logo strong{font-size:20px;color:#021426}
+    h1{margin:0;font-size:24px}
+    p.lead{color:var(--muted);margin:8px 0 20px}
+    .card{background:var(--card);padding:20px;border-radius:16px;box-shadow:0 6px 30px rgba(2,6,12,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .grid{display:grid;grid-template-columns:1fr 340px;gap:20px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr} .toc{order:-1}}
+    .section{margin-bottom:18px}
+    h2{margin:0 0 8px;font-size:18px}
+    .muted{color:var(--muted);font-size:14px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--accent);font-weight:600;border:1px solid rgba(6,182,212,0.12)}
+    pre{background:#071827;padding:14px;border-radius:10px;overflow:auto;color:#dff1f6}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    td,th{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:left}
+    .verify{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);font-weight:600}
+    footer{margin-top:20px;color:var(--muted);font-size:13px}
+    .download{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021426;font-weight:700;text-decoration:none}
+    .math{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); padding:12px;border-radius:10px}
+  </style>
+  <!-- MathJax para renderizar LaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo"><strong>T</strong></div>
+      <div>
+        <h1>Planificación de producción — Método de sustitución</h1>
+        <p class="lead">Caso práctico: Toyota — cálculo de unidades producidas a partir de recursos usados (horas y kits electrónicos).</p>
+      </div>
+    </header>
+
+    <div class="grid" style="margin-top:18px">
+      <main>
+        <section class="card section">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h2>1. Contexto industrial</h2>
+              <p class="muted">Toyota necesita planificar y registrar la producción diaria teniendo en cuenta dos recursos principales: <strong>horas de mano de obra</strong> y <strong>kits electrónicos</strong>.</p>
+            </div>
+            <div class="badge">Lean manufacturing</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <ul class="muted">
+              <li><strong>Toyota Corolla (sedán):</strong> 3 horas de mano de obra y 2 kits electrónicos por unidad.</li>
+              <li><strong>Toyota RAV4 (SUV):</strong> 5 horas de mano de obra y 4 kits electrónicos por unidad.</li>
+              <li><strong>Total reportado en la jornada:</strong> 290 horas y 220 kits electrónicos usados.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>2. Formulación matemática</h2>
+          <p class="muted">Definimos las variables y planteamos el sistema de ecuaciones que modela los recursos consumidos por la producción.</p>
+          <div class="math">
+            <p>Sea <strong>x</strong> = número de Toyota Corolla producidos y <strong>y</strong> = número de Toyota RAV4 producidos.</p>
+            <p>Entonces el sistema es:</p>
+            <p>\[\begin{cases}3x+5y=290\\2x+4y=220\end{cases}\]</p>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2>3. Solución por sustitución (paso a paso)</h2>
+          <p class="muted">Despejamos una variable y sustituimos en la otra ecuación para resolver el sistema.</p>
+
+          <div class="math">
+            <p><strong>Paso 1 — Despejar \(x\) a partir de la segunda ecuación:</strong></p>
+            <p>\[2x+4y=220 \Rightarrow 2x=220-4y \Rightarrow x=110-2y.\]</p>
+
+            <p><strong>Paso 2 — Sustituir \(x=110-2y\) en la primera ecuación:</strong></p>
+            <p>\[3(110-2y)+5y=290.\]</p>
+
+            <p><strong>Paso 3 — Resolver la ecuación resultante:</strong></p>
+            <p>\[330-6y+5y=290 \Rightarrow 330-y=290 \Rightarrow -y=-40 \Rightarrow y=40.\]</p>
+
+            <p><strong>Paso 4 — Calcular \(x\):</strong></p>
+            <p>\[x=110-2(40)=110-80=30.\]</p>
+
+            <p><strong>Solución:</strong> \[x=30,\quad y=40.\]</p>
+          </div>
+
+        </section>
+
+        <section class="card section">
+          <h2>4. Verificación</h2>
+          <p class="muted">Comprobamos que los valores hallados satisfacen ambas ecuaciones originales.</p>
+
+          <div class="math">
+            <p><strong>Ecuación 1 (horas):</strong></p>
+            <p>\[3(30)+5(40)=90+200=290.\]</p>
+
+            <p><strong>Ecuación 2 (kits):</strong></p>
+            <p>\[2(30)+4(40)=60+160=220.\]</p>
+
+            <p>Ambas igualdades se cumplen, por lo que la solución es correcta.</p>
+          </div>
+
+        </section>
+
+        <section class="card section">
+          <h2>5. Interpretación y conclusiones</h2>
+          <p class="muted">Según los resultados, la producción del día fue:</p>
+          <table>
+            <tr><th>Modelo</th><th>Unidades producidas</th><th>Recursos por unidad</th></tr>
+            <tr><td>Toyota Corolla</td><td>30</td><td>3 horas, 2 kits</td></tr>
+            <tr><td>Toyota RAV4</td><td>40</td><td>5 horas, 4 kits</td></tr>
+          </table>
+
+          <p style="margin-top:10px" class="muted">El resultado indica que los recursos reportados (290 horas y 220 kits) se agotaron exactamente con esa combinación de producción (sin excedentes ni faltantes en los dos recursos considerados). Esto es un indicador de planificación efectiva en términos de uso de recursos.</p>
+
+        </section>
+
+        <section class="card section">
+          <h2>6. Nota sobre generalización</h2>
+          <p class="muted">Este mismo procedimiento (plantear un sistema lineal y usar sustitución o eliminación) se puede aplicar siempre que conozcas los consumos por unidad y el total de recursos usados.</p>
+          <p class="muted">Si en vez de tener igualdad exacta hubieran quedado recursos remanentes o faltantes, el sistema podría no tener solución entera o podría requerir ajustar la mezcla de producción, priorizar un producto o revisar disponibilidad de recursos.</p>
+        </section>
+
+      </main>
+
+      <aside class="toc card">
+        <h2>Resumen rápido</h2>
+        <p class="muted">Resultados clave y acciones recomendadas.</p>
+        <div class="verify">
+          <div class="pill">Corolla: <strong>30</strong></div>
+          <div class="pill">RAV4: <strong>40</strong></div>
+          <div class="pill">Horas usadas: <strong>290</strong></div>
+          <div class="pill">Kits usados: <strong>220</strong></div>
+        </div>
+
+        <h3 style="margin-top:12px">Recomendaciones</h3>
+        <ul class="muted">
+          <li>Registrar tiempos y kits por lote para validar el consumo real por unidad.</li>
+          <li>Si se espera variabilidad, considerar margen de seguridad en kits o turnos.</li>
+          <li>Usar el modelo para simular combinaciones alternativas de producción.</li>
+        </ul>
+
+        <a class="download" id="downloadBtn" href="#">Descargar HTML</a>
+
+        <script>
+          // Generador simple para descargar el HTML actual como archivo
+          document.addEventListener('DOMContentLoaded', function(){
+            var btn = document.getElementById('downloadBtn');
+            btn.addEventListener('click', function(e){
+              e.preventDefault();
+              var doc = '<!doctype html>\\n' + document.documentElement.outerHTML;
+              var blob = new Blob([doc], {type: 'text/html'});
+              var url = URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              a.href = url; a.download = 'Produccion_Toyota_Sustitucion.html';
+              document.body.appendChild(a); a.click(); a.remove();
+              URL.revokeObjectURL(url);
+            });
+          });
+        </script>
+
+      </aside>
+    </div>
+
+    <footer style="text-align:center">
+      <p class="muted">Generado automáticamente — presentación del problema y solución paso a paso (método de sustitución). Puedes descargar esta página con el botón "Descargar HTML".</p>
+    </footer>
+  </div>
+</body>
+</html>
